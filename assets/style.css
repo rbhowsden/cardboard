@@ -93,3 +93,7 @@ footer.site .legal{margin-top:30px;border-top:1px solid #4a3c2d;padding-top:18px
 
 .hero .art img{width:100%;height:auto;display:block;filter:drop-shadow(6px 6px 0 rgba(0,0,0,.18))}
 .cutout .stage img{height:100%;width:auto;display:block;filter:drop-shadow(4px 4px 0 rgba(0,0,0,.15))}
+/* Hero cutouts: force identical height, width follows each image's proportions */
+.hero .art{gap:18px}
+.hero .art div{width:auto;height:clamp(300px,36vw,430px)}
+.hero .art img,.hero .art svg{height:100%;width:auto}
