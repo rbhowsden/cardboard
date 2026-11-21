@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Member Login | Cardboard Cutout Club</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23c99a63'/%3E%3Ccircle cx='50' cy='34' r='15' fill='%232b2118'/%3E%3Cpath d='M26 88 L34 56 L66 56 L74 88Z' fill='%232b2118'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="logo" href="index.html"><svg viewBox="0 0 100 100"><rect width="100" height="100" rx="18" fill="#c99a63"/><circle cx="50" cy="34" r="15" fill="#2b2118"/><path d="M26 88 L34 56 L66 56 L74 88Z" fill="#2b2118"/></svg>Cardboard Cutout Club</a>
+  <nav class="main">
+    <a href="index.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="membership.html">Membership</a>
+    <a href="faq.html">FAQ</a>
+    <a class="btn small" href="login.html">Member Login</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <form class="loginbox" id="f" novalidate>
+    <h1>Member login</h1>
+    <p class="s">Welcome back to the club.</p>
+    <div class="err" id="err" role="alert">Email or password doesn't match. Please try again.</div>
+    <label for="email">Email address</label>
+    <input type="email" id="email" autocomplete="username" placeholder="you@example.com">
+    <label for="pw">Password</label>
+    <input type="password" id="pw" autocomplete="current-password">
+    <div class="row">
+      <label style="margin:0;font-weight:500"><input type="checkbox"> Remember me</label>
+      <a href="#" id="forgot">Forgot password?</a>
+    </div>
+    <button class="btn" type="submit" id="go">Log in</button>
+    <p class="note">Your membership was set up by someone special. Use the email address they enrolled you with.</p>
+  </form>
+</main>
+
+<footer class="site"><div class="wrap">
+  <div class="cols">
+    <div><h4>Cardboard Cutout Club</h4><p>Life-size company, delivered monthly. Proudly flat since 2019.</p></div>
+    <div><h4>Club</h4><ul><li><a href="gallery.html">Gallery</a></li><li><a href="membership.html">Membership</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div><h4>Members</h4><ul><li><a href="login.html">Member login</a></li><li><a href="faq.html">Cancel or pause</a></li></ul></div>
+  </div>
+  <div class="legal">&copy; 2026 Cardboard Cutout Club. All rights reserved. Cutouts are not people. Cutouts are not responsible for the contents of your hallway.</div>
+</div></footer>
+
+<script>
+  // Nothing is sent anywhere. The login always fails, on purpose.
+  var f = document.getElementById("f"), err = document.getElementById("err"), btn = document.getElementById("go");
+  var tries = 0;
+  f.addEventListener("submit", function (e) {
+    e.preventDefault();
+    err.classList.remove("show");
+    btn.disabled = true; btn.textContent = "Logging in...";
+    setTimeout(function () {
+      tries++;
+      err.textContent = tries > 2
+        ? "Email or password doesn't match. Still not working? Ask whoever signed you up."
+        : "Email or password doesn't match. Please try again.";
+      err.classList.add("show");
+      document.getElementById("pw").value = "";
+      btn.disabled = false; btn.textContent = "Log in";
+    }, 900);
+  });
+  document.getElementById("forgot").addEventListener("click", function (e) {
+    e.preventDefault();
+    err.textContent = "We couldn't find a membership for that email address.";
+    err.classList.add("show");
+  });
+</script>
+</body>
+</html>
