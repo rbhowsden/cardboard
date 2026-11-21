@@ -47,6 +47,7 @@
   <div class="legal">&copy; 2026 Cardboard Cutout Club. All rights reserved. Cutouts are not people. Cutouts are not responsible for the contents of your hallway.</div>
 </div></footer>
 
+<script src="assets/config.js"></script>
 <script>
   // Nothing is sent anywhere. The login always fails, on purpose.
   var f = document.getElementById("f"), err = document.getElementById("err"), btn = document.getElementById("go");
@@ -55,7 +56,14 @@
     e.preventDefault();
     err.classList.remove("show");
     btn.disabled = true; btn.textContent = "Logging in...";
+    var m = window.MEMBER, em = document.getElementById("email").value.trim().toLowerCase();
+    var ok = em === m.email.toLowerCase() && document.getElementById("pw").value === m.password;
     setTimeout(function () {
+      if (ok) {
+        try { sessionStorage.setItem("ccc_in", "1"); } catch (x) {}
+        location.href = "account.html";
+        return;
+      }
       tries++;
       err.textContent = tries > 2
         ? "Email or password doesn't match. Still not working? Ask whoever signed you up."
