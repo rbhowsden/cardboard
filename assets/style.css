@@ -90,3 +90,6 @@ footer.site .legal{margin-top:30px;border-top:1px solid #4a3c2d;padding-top:18px
   header.site .wrap{height:auto;padding:12px 20px;flex-direction:column}
 }
 @media(max-width:560px){.grid.c3,.grid.c2{grid-template-columns:1fr}}
+
+.hero .art img{width:100%;height:auto;display:block;filter:drop-shadow(6px 6px 0 rgba(0,0,0,.18))}
+.cutout .stage img{height:100%;width:auto;display:block;filter:drop-shadow(4px 4px 0 rgba(0,0,0,.15))}

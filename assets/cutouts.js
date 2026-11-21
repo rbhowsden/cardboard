@@ -50,11 +50,17 @@
       '<path d="M58 112 L142 112 Q160 190 128 250 L124 376 L76 376 L72 250 Q40 190 58 112Z" ' + P + '/>' +
       '<path d="M84 90 Q100 100 116 90" fill="none"/>', "Cardboard cutout of a famous-looking person in sunglasses")
   };
+  // Real photos (transparent webp). Add more here and use data-cutout="name".
+  var photos = {
+    bob: ["assets/cutouts/bob.webp", "Cardboard cutout of a painter with a palette and a squirrel"],
+    elf: ["assets/cutouts/elf.webp", "Cardboard cutout of an overjoyed holiday elf"]
+  };
   function paint() {
     var els = document.querySelectorAll("[data-cutout]");
     for (var i = 0; i < els.length; i++) {
       var k = els[i].getAttribute("data-cutout");
-      if (art[k]) els[i].innerHTML = art[k];
+      if (photos[k]) els[i].innerHTML = '<img src="' + photos[k][0] + '" alt="' + photos[k][1] + '">';
+      else if (art[k]) els[i].innerHTML = art[k];
     }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", paint);
