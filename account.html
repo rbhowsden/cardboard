@@ -31,25 +31,26 @@
   </nav>
 </div></header>
 
-<div class="pagehead"><div class="wrap"><h1 id="hi">Welcome to the club!</h1><p>Your membership is active. Here is everything you need to know.</p></div></div>
+<div class="pagehead"><div class="wrap"><h1 id="hi">Welcome to the club!</h1><p>Your subscription is active. Here is everything you need to know.</p></div></div>
 
 <section><div class="wrap">
-  <div class="banner">Your first cutout is being prepared for shipment. Please make sure someone is home to receive it. It is large.</div>
+  <div class="banner">Your first cutout has entered production and will be dispatched within 3 to 5 business days via standard ground service. Please make sure someone is home to receive it. It is large.</div>
 
   <div class="grid c2">
     <div class="card">
-      <h3>Membership <span class="status">ACTIVE</span></h3>
+      <h3>Subscription <span class="status">ACTIVE</span></h3>
       <dl>
         <dt>Member</dt><dd id="fn"></dd>
-        <dt>Member ID</dt><dd id="mid"></dd>
+        <dt>Order #</dt><dd id="ord"></dd>
         <dt>Plan</dt><dd id="plan"></dd>
         <dt>Billing</dt><dd id="price"></dd>
-        <dt>Enrolled by</dt><dd id="gift"></dd>
+        <dt>Next billing date</dt><dd id="nextbill"></dd>
         <dt>Member since</dt><dd id="since"></dd>
       </dl>
       <div class="acts">
-        <button class="btn ghost small" data-act="cancel">Cancel membership</button>
-        <button class="btn ghost small" data-act="pause">Pause</button>
+        <button class="btn ghost small" data-act="delivery">Update delivery preferences</button>
+        <button class="btn ghost small" data-act="modify">Modify subscription</button>
+        <button class="btn ghost small" data-act="cancel">Cancel subscription</button>
         <button class="btn ghost small" data-act="pw">Change password</button>
       </div>
       <div class="err" id="msg" role="alert"></div>
@@ -59,18 +60,19 @@
       <h3>Next shipment</h3>
       <p style="margin:0"><b id="next"></b></p>
       <div class="truck"><i></i></div>
-      <p style="margin:0;color:var(--muted);font-size:.9rem">Status: Being unfolded and inspected</p>
+      <p style="margin:0;color:var(--muted);font-size:.9rem">Status: In production &middot; Standard ground &middot; Ships to <span id="shipto"></span></p>
       <div style="height:200px;display:flex;justify-content:center;margin-top:16px"><div data-cutout="celeb" style="height:100%"></div></div>
-      <p style="text-align:center;color:var(--muted);font-size:.85rem;margin:6px 0 0">Contents are a surprise. We will say it has legs.</p>
+      <p style="text-align:center;color:var(--muted);font-size:.85rem;margin:6px 0 0">Life-size, heavy-duty corrugated board, attached fold-out easel back. Contents are a surprise. We will say it has legs.</p>
     </div>
   </div>
 
   <div class="card" style="margin-top:22px">
-    <h3>Shipment history</h3>
+    <h3>Billing &amp; shipment history</h3>
     <table>
-      <tr><th>Date</th><th>Item</th><th>Status</th></tr>
-      <tr><td id="d0"></td><td>Welcome cutout (mystery)</td><td>Preparing</td></tr>
-      <tr><td colspan="3" style="color:var(--muted)">Your history will appear here as cutouts arrive.</td></tr>
+      <tr><th>Date</th><th>Item</th><th>Amount</th><th>Status</th></tr>
+      <tr><td id="d0"></td><td>Initial payment &middot; Order #<span id="ord2"></span></td><td id="amt0"></td><td>Paid</td></tr>
+      <tr><td id="d1"></td><td>Cutout #1 (mystery)</td><td>&mdash;</td><td>In production</td></tr>
+      <tr><td id="d2"></td><td>Monthly renewal</td><td id="amt2"></td><td>Scheduled</td></tr>
     </table>
   </div>
 </div></section>
@@ -86,17 +88,19 @@
   try { ok = sessionStorage.getItem("ccc_in") === "1"; } catch (e) {}
   if (!ok) location.replace("login.html");
   var m = window.MEMBER, $ = function (i) { return document.getElementById(i); };
-  var fmt = function (d) { return d.toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" }); };
-  var now = new Date(), next = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 6);
   $("hi").textContent = "Welcome to the club, " + m.name + "!";
-  $("fn").textContent = m.fullName; $("mid").textContent = m.memberId;
+  $("fn").textContent = m.fullName; $("ord").textContent = m.orderNumber; $("ord2").textContent = m.orderNumber;
   $("plan").textContent = m.plan; $("price").textContent = m.price + " / month";
-  $("gift").textContent = m.giftedBy; $("since").textContent = fmt(now);
-  $("next").textContent = "Estimated arrival: " + fmt(next);
-  $("d0").textContent = fmt(now);
+  $("nextbill").textContent = m.nextBilling; $("since").textContent = m.orderDate;
+  $("next").textContent = "Dispatching by " + m.dispatchBy;
+  $("shipto").textContent = m.shipTo;
+  $("d0").textContent = m.orderDate; $("amt0").textContent = m.price;
+  $("d1").textContent = m.orderDate;
+  $("d2").textContent = m.nextBilling; $("amt2").textContent = m.price;
   var msgs = {
-    cancel: "Cancellation requests require 30 days written notice from the member who enrolled you. Please contact them directly.",
-    pause: "Pausing is unavailable during your welcome period. Your cutout is already in production.",
+    delivery: "Delivery preferences cannot be changed while your cutout is in production. Please check back after dispatch.",
+    modify: "Plan changes take effect on your next billing date (" + m.nextBilling + "). No other plans are currently accepting new members.",
+    cancel: "Cancellation requests require 30 days written notice. Your next billing date of " + m.nextBilling + " is within this window.",
     pw: "Your temporary password cannot be changed until your first cutout has been delivered."
   };
   document.querySelectorAll("[data-act]").forEach(function (b) {
