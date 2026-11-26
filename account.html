@@ -25,7 +25,7 @@
 <header class="site"><div class="wrap">
   <a class="logo" href="index.html"><svg viewBox="0 0 100 100"><rect width="100" height="100" rx="18" fill="#c99a63"/><circle cx="50" cy="34" r="15" fill="#2b2118"/><path d="M26 88 L34 56 L66 56 L74 88Z" fill="#2b2118"/></svg>Cardboard Cutout Club</a>
   <nav class="main">
-    <a href="gallery.html">Gallery</a>
+    <a href="drops.html">Past Drops</a>
     <a class="active" href="account.html">My Membership</a>
     <a class="btn small" href="#" id="out">Log out</a>
   </nav>
@@ -61,7 +61,7 @@
       <p style="margin:0"><b id="next"></b></p>
       <div class="truck"><i></i></div>
       <p style="margin:0;color:var(--muted);font-size:.9rem">Status: In production &middot; Standard ground &middot; Ships to <span id="shipto"></span></p>
-      <div id="box" style="height:240px;margin-top:16px;background:radial-gradient(circle at 50% 45%,#fff3c4,transparent 65%)"><div data-mystery style="height:100%"></div></div>
+      <div id="box" style="height:240px;margin-top:16px;background:radial-gradient(circle at 50% 45%,#fff3c4,transparent 65%)"><div data-mystery="blend" style="height:100%"></div></div>
       <p style="text-align:center;color:var(--muted);font-size:.85rem;margin:6px 0 0">Life-size, heavy-duty corrugated board, attached fold-out easel back. Contents are a surprise. We will say it has legs.</p>
       <p style="text-align:center;margin:12px 0 0"><button class="btn ghost small" id="peek" type="button">Peek inside the box</button></p>
       <p id="peekmsg" style="text-align:center;font-weight:700;min-height:1.6em;margin:8px 0 0" aria-live="polite"></p>
@@ -108,7 +108,7 @@
   var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], lu = "";
   for (var i = 0; i < 12; i++) {
     var mi = (11 + i) % 12, yr = 2026 + Math.floor((11 + i) / 12);
-    lu += '<figure><div class="m" data-mystery></div><figcaption>#' + (i + 1) + " &middot; " + months[mi] + " " + yr + (i ? "" : " (in production)") + "</figcaption></figure>";
+    lu += '<figure><div class="m" data-mystery="' + window.UPCOMING[i] + '"></div><figcaption>#' + (i + 1) + " &middot; " + months[mi] + " " + yr + (i ? "" : " (in production)") + "</figcaption></figure>";
   }
   $("lineup").innerHTML = lu;
   var peeks = [

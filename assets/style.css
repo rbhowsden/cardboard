@@ -113,7 +113,7 @@ button.cutout{font:inherit;color:inherit;text-align:left;padding:0;cursor:pointe
 /* ---------- Conga line ---------- */
 .conga{overflow:hidden;padding:22px 0 0;background:repeating-linear-gradient(90deg,var(--cb) 0 14px,var(--cb-dark) 14px 16px);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.conga .track{display:flex;align-items:flex-end;gap:34px;width:max-content;animation:conga 55s linear infinite}
+.conga .track{display:flex;align-items:flex-end;gap:34px;width:max-content;animation:conga 150s linear infinite}
 .conga:hover .track{animation-play-state:paused}
 .conga figure{margin:0;height:220px}
 .conga figure:nth-child(odd){animation:hop 1.1s ease-in-out infinite}
@@ -125,6 +125,7 @@ button.cutout{font:inherit;color:inherit;text-align:left;padding:0;cursor:pointe
 
 /* ---------- Mystery silhouettes ---------- */
 .mystery,.slot .win{position:relative;display:flex;justify-content:center;align-items:flex-end}
+.mystery img{height:100%;width:auto;max-width:100%;object-fit:contain;display:block}
 img.shadow{filter:brightness(0) drop-shadow(5px 4px 0 rgba(0,0,0,.18))!important;opacity:.88}
 .q{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);font-size:clamp(3rem,7vw,5rem);font-weight:900;color:var(--cb-light);text-shadow:3px 3px 0 var(--accent);pointer-events:none;animation:pulse 1.8s ease-in-out infinite}
 @keyframes pulse{50%{transform:translate(-50%,-50%) scale(1.12)}}
@@ -145,7 +146,11 @@ img.shadow{filter:brightness(0) drop-shadow(5px 4px 0 rgba(0,0,0,.18))!important
 .chips{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:26px}
 .chip{font:inherit;font-weight:700;font-size:.9rem;padding:7px 16px;border-radius:99px;border:2px solid var(--ink);background:#fff;cursor:pointer;color:var(--ink)}
 .chip.on{background:var(--ink);color:var(--cb-light)}
-.gal .cutout[hidden]{display:none}
+.gal .cutout{display:flex;flex-direction:column;justify-content:flex-start}
+.gal .cutout .meta{flex:1}
+.gal .cutout .month{display:flex;align-items:baseline;gap:6px;padding:10px 16px;background:var(--ink);color:var(--cb-light);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+.gal .cutout .month b{font-size:1.15rem;color:#fff;letter-spacing:.02em}
+.gal .cutout .latest{margin-left:auto;background:var(--accent);color:#fff;font-weight:800;font-size:.7rem;padding:2px 8px;border-radius:99px;letter-spacing:.08em}
 
 /* ---------- Spec popup ---------- */
 .lightbox{position:fixed;inset:0;z-index:50;background:rgba(43,33,24,.72);display:none;align-items:center;justify-content:center;padding:16px}
