@@ -21,6 +21,9 @@
 </div></header>
 
 <main class="wrap">
+  <div class="login-stage">
+  <div class="lean l" data-cutout="wonder"></div>
+  <div class="lean" data-cutout="elf"></div>
   <form class="loginbox" id="f" novalidate>
     <h1>Member login</h1>
     <p class="s">Welcome back to the club.</p>
@@ -36,6 +39,7 @@
     <button class="btn" type="submit" id="go">Log in</button>
     <p class="note">Use the username and temporary password from your order confirmation letter.</p>
   </form>
+  </div>
 </main>
 
 <footer class="site"><div class="wrap">
@@ -48,6 +52,7 @@
 </div></footer>
 
 <script src="assets/config.js"></script>
+<script src="assets/cutouts.js"></script>
 <script>
   // Nothing is sent anywhere. Only the username/password in config.js gets in.
   var f = document.getElementById("f"), err = document.getElementById("err"), btn = document.getElementById("go");

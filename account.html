@@ -61,9 +61,17 @@
       <p style="margin:0"><b id="next"></b></p>
       <div class="truck"><i></i></div>
       <p style="margin:0;color:var(--muted);font-size:.9rem">Status: In production &middot; Standard ground &middot; Ships to <span id="shipto"></span></p>
-      <div style="height:200px;display:flex;justify-content:center;margin-top:16px"><div data-cutout="celeb" style="height:100%"></div></div>
+      <div id="box" style="height:240px;margin-top:16px;background:radial-gradient(circle at 50% 45%,#fff3c4,transparent 65%)"><div data-mystery style="height:100%"></div></div>
       <p style="text-align:center;color:var(--muted);font-size:.85rem;margin:6px 0 0">Life-size, heavy-duty corrugated board, attached fold-out easel back. Contents are a surprise. We will say it has legs.</p>
+      <p style="text-align:center;margin:12px 0 0"><button class="btn ghost small" id="peek" type="button">Peek inside the box</button></p>
+      <p id="peekmsg" style="text-align:center;font-weight:700;min-height:1.6em;margin:8px 0 0" aria-live="polite"></p>
     </div>
+  </div>
+
+  <div class="card" style="margin-top:22px">
+    <h3>Your upcoming lineup</h3>
+    <p style="margin:0 0 18px;color:var(--muted)">Twelve months of surprises, already reserved in your name. Contents revealed one doorstep at a time.</p>
+    <div class="lineup" id="lineup"></div>
   </div>
 
   <div class="card" style="margin-top:22px">
@@ -97,6 +105,23 @@
   $("d0").textContent = m.orderDate; $("amt0").textContent = m.price;
   $("d1").textContent = m.orderDate;
   $("d2").textContent = m.nextBilling; $("amt2").textContent = m.price;
+  var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], lu = "";
+  for (var i = 0; i < 12; i++) {
+    var mi = (11 + i) % 12, yr = 2026 + Math.floor((11 + i) / 12);
+    lu += '<figure><div class="m" data-mystery></div><figcaption>#' + (i + 1) + " &middot; " + months[mi] + " " + yr + (i ? "" : " (in production)") + "</figcaption></figure>";
+  }
+  $("lineup").innerHTML = lu;
+  var peeks = [
+    "No peeking. The cutout is shy.",
+    "The box is taped shut. Very well taped. Suspiciously well taped.",
+    "You hear faint rustling. Cardboard doesn't rustle on its own.",
+    "Peeking voids the surprise. And possibly the warranty.",
+    "Fine. It's life-size. That's all we can say."
+  ], pk = 0;
+  $("peek").addEventListener("click", function () {
+    var b = $("box"); b.classList.remove("boxshake"); void b.offsetWidth; b.classList.add("boxshake");
+    $("peekmsg").textContent = peeks[pk++ % peeks.length];
+  });
   var msgs = {
     delivery: "Delivery preferences cannot be changed while your cutout is in production. Please check back after dispatch.",
     modify: "Plan changes take effect on your next billing date (" + m.nextBilling + "). No other plans are currently accepting new members.",
